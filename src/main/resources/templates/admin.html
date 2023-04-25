@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table th:border="1">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Email</th>
+        <th>Buttons</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.password}"></td>
+        <td th:text="${user.email}"></td>
+
+        <td>
+            <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
+                <input type="submit" value="DELETE">
+            </form>
+            <form th:method="GET" th:action="@{/admin/{id}/edit(id=${user.getId()})}">
+                <input type="submit" value="UPDATE">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<form th:method="GET" th:action="@{admin/newUser}">
+    <input type="submit" value="ADD">
+</form>
+
+<br>
+
+<form th:action="@{/logout}" th:method="POST">
+    <button>Exit</button>
+</form>
+<!--<table th:border="1">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Id</th>-->
+<!--        <th>Username</th>-->
+<!--        <th>Password</th>-->
+<!--        <th>Email</th>-->
+<!--        <th>Buttons</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="user : ${users}">-->
+
+<!--        <td th:text="${user.id}"></td>-->
+<!--        <td th:text="${user.username}"></td>-->
+<!--        <td th:text="${user.getP}"></td>-->
+<!--        <td th:text="${user.getEmail()}"></td>-->
+
+<!--        <td>-->
+<!--            <form th:action="@{/admin/{id}/editUser(id=${user.getId()})}">-->
+<!--                <input type="submit" value="UPDATE">-->
+<!--            </form>-->
+<!--            <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">-->
+<!--                <input type="submit" value="DELETE">-->
+<!--            </form>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+
+<!--<br>-->
+
+<!--<form th:method="GET"th:action="@{/newUser}">-->
+<!--    <input type="submit" value="ADD">-->
+<!--</form>-->
+<!--<br>-->
+
+<!--<form th:action="@{/logout}" th:method="POST">-->
+<!--    <input type="submit" value="Exit">-->
+<!--</form>-->
+</body>
+</html>
